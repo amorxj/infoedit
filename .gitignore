@@ -2,3 +2,7 @@
 bootstrap.json
 build/
 ext/
+
+node_modules/\.bin/
+
+node_modules/
