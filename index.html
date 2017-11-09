@@ -5,7 +5,43 @@
     <title>infoedit</title>
   </head>
   <body>
-    <div id="app"></div>
-    <script src="/dist/build.js"></script>
+
+    <div id="app" class="col-xs-12">
+			<test
+       :hotel='hotels'
+       :roomtypes='roomtypes'
+       :breakfasts='breakfasts'
+       :channels='channels'
+       :operators='operators'></test>
+		</div>
+
+    <div>
+        需要修改数据，请使用文本编辑器修改db.js文件中的内容
+    </div>
   </body>
+
+  <script  src="./dist/vue.js"></script>
+  <script  src="./dist/test.js"></script>
+  <script  src="./db.js"></script>
+  <script>
+    var xxx = db();
+    // debugger;
+  	// Vue.component()
+  	new Vue({
+  		el: '#app',
+      components:{
+          'test':test
+      },
+      data:{
+          hotels: xxx.hotels,
+          roomtypes: xxx.roomtypes,
+          breakfasts: xxx.breakfasts,
+          channels:xxx.channels,
+          operators: xxx.operators,
+        }
+      }
+  	)
+  </script>
+
+
 </html>

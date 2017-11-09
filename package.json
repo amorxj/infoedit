@@ -10,7 +10,7 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
-    "vue": "^2.4.4"
+    "vue": "^2.1.0"
   },
   "browserslist": [
     "> 1%",
@@ -18,16 +18,31 @@
     "not ie <= 8"
   ],
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-stage-3": "^6.24.1",
-    "cross-env": "^5.0.5",
-    "css-loader": "^0.28.7",
-    "file-loader": "^1.1.4",
-    "vue-loader": "^13.0.5",
-    "vue-template-compiler": "^2.4.4",
-    "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.9.1"
+    "babel-core": "^6.0.0",
+    "babel-helper-vue-jsx-merge-props": "^2.0.1",
+    "babel-loader": "^6.0.0",
+    "babel-plugin-syntax-jsx": "^6.13.0",
+    "babel-plugin-transform-runtime": "^6.0.0",
+    "babel-plugin-transform-vue-jsx": "^3.1.0",
+    "babel-preset-es2015": "^6.0.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "babel-preset-stage-2": "^6.0.0",
+    "babel-runtime": "^6.0.0",
+    "cross-env": "^1.0.6",
+    "css-loader": "^0.23.0",
+    "expose-loader": "^0.7.1",
+    "file-loader": "^0.8.4",
+    "mathjs": "^3.16.5",
+    "moment": "^2.19.1",
+    "node-sass": "^4.2.0",
+    "sass-loader": "^4.1.1",
+    "vue": "^2.1.3",
+    "vue-hot-reload-api": "^1.2.0",
+    "vue-html-loader": "^1.0.0",
+    "vue-loader": "^9.5.0",
+    "vue-moment": "^2.2.0",
+    "vue-template-compiler": "^2.1.3",
+    "webpack": "^1.12.2",
+    "webpack-dev-server": "^1.12.0"
   }
 }

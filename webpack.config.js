@@ -2,77 +2,82 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
-  entry: './src/main.js',
+  entry: {
+    test: './src/test.vue',
+  },
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
-    filename: 'build.js'
+    publicPath: '/dist',
+    filename: '[name].js',
+    libraryTarget: 'umd',
+    library: '[name]',
+    umdNamedDefine: true
   },
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: [
-          'vue-style-loader',
-          'css-loader'
-        ],
-      },      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          loaders: {
-          }
-          // other vue-loader options go here
-        }
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
-      },
-      {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?[hash]'
-        }
-      }
-    ]
-  },
+
+
   resolve: {
+    root: path.join(__dirname, 'node_modules'),
     alias: {
-      'vue$': 'vue/dist/vue.esm.js'
+      'vue': 'vue/dist/vue.js'
     },
-    extensions: ['*', '.js', '.vue', '.json']
+    extensions: ['', '.js', '.vue', '.json'],
   },
+
+  externals: {
+    vue: {
+      root: 'Vue',
+      commonjs: 'vue',
+      commonjs2: 'vue',
+      amd: 'vue'
+    }
+  },
+
+  module: {
+    loaders: [{
+      test: /\.vue$/,
+      loader: 'vue'
+    }, {
+      test: /\.js$/,
+      loader: 'babel',
+      exclude: /node_modules/
+    }, {
+      test: /\.json$/,
+      loader: 'json'
+    }, {
+      test: /\.html$/,
+      loader: 'vue-html'
+    }, {
+      test: /\.(png|jpg|gif|svg)$/,
+      loader: 'url',
+      query: {
+        limit: 10000,
+        name: '[name].[ext]?[hash]'
+      }
+    }]
+  },
+
+  babel: {
+    presets: ['es2015', 'stage-0'],
+    plugins: ['transform-runtime', 'transform-vue-jsx'],
+  },
+
   devServer: {
     historyApiFallback: true,
-    noInfo: true,
-    overlay: true
-  },
-  performance: {
-    hints: false
+    noInfo: true
   },
   devtool: '#eval-source-map'
 }
 
 if (process.env.NODE_ENV === 'production') {
   module.exports.devtool = '#source-map'
-  // http://vue-loader.vuejs.org/en/workflow/production.html
+    // http://vuejs.github.io/vue-loader/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false
-      }
-    }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true
-    })
+
+    new webpack.optimize.OccurenceOrderPlugin()
   ])
 }
